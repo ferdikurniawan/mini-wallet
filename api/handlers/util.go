@@ -2,15 +2,30 @@ package handlers
 
 import (
 	"errors"
+	"fmt"
 	"mini-wallet/api/model"
 	"strings"
 )
 
 func buildAPIOutput(status string, data interface{}) model.APIOutput {
+	if status == model.APIError {
+		msgString := fmt.Sprintf("%x", data)
+		return model.APIOutput{
+			Status:  status,
+			Message: msgString,
+		}
+	}
 	return model.APIOutput{
 		Data:   data,
 		Status: status,
 	}
+}
+
+func buildErrorMessage(key, value string) map[string]string {
+	msg := map[string]string{
+		key: value,
+	}
+	return msg
 }
 
 func getToken(auth string) (string, error) {

@@ -7,8 +7,9 @@ const (
 )
 
 type APIOutput struct {
-	Data   interface{} `json:"data"`
-	Status string      `json:"status"`
+	Data    interface{} `json:"data,omitempty"`
+	Status  string      `json:"status"`
+	Message string      `json:"message,omitempty"`
 }
 
 type User struct {
