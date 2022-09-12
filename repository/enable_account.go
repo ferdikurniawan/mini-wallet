@@ -7,7 +7,6 @@ import (
 )
 
 func EnableAccountByUserID(db *sql.DB, accountID int) error {
-	//TODO use transaction
 	ctx := context.Background()
 
 	//start transaction mode

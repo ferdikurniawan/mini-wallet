@@ -15,8 +15,8 @@ type (
 
 	Service interface {
 		CreateAccount(req model.User) (model.UserToken, error)
-		FindAccountByToken(token string) (int, error)
-		EnableAccount(accountID int) error
+		FindAccountByToken(token string) (*model.Accounts, error)
+		EnableWallet(accountID int, customerID string) (*model.Wallets, error)
 	}
 )
 

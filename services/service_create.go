@@ -16,7 +16,6 @@ func (s *service) CreateAccount(req model.User) (model.UserToken, error) {
 	accountData := repository.Accounts{
 		CustomerID: req.CustomerID,
 		Token:      token,
-		Status:     "disabled",
 		Salt:       randSalt,
 	}
 

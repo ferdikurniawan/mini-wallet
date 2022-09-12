@@ -9,15 +9,15 @@ import (
 
 func buildAPIOutput(status string, data interface{}) model.APIOutput {
 	if status == model.APIError {
-		msgString := fmt.Sprintf("%x", data)
+		msgString := fmt.Sprint(data)
 		return model.APIOutput{
 			Status:  status,
 			Message: msgString,
 		}
 	}
 	return model.APIOutput{
-		Data:   data,
 		Status: status,
+		Data:   data,
 	}
 }
 

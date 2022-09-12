@@ -1,12 +1,29 @@
 package services
 
-import "mini-wallet/repository"
+import (
+	"mini-wallet/api/model"
+	"mini-wallet/repository"
 
-func (s *service) EnableAccount(accountID int) error {
-	err := repository.EnableAccountByUserID(s.DB, accountID)
+	"github.com/google/uuid"
+)
+
+func (s *service) EnableWallet(accountID int, customerID string) (*model.Wallets, error) {
+
+	uuidRandom := uuid.New()
+	walletID := uuidRandom.String()
+
+	walletFromDB, err := repository.CreateWallet(s.DB, walletID, accountID)
 	if err != nil {
 		s.Logger.Errorf("[EnableAccount] error enabling account : %s", err.Error())
-		return err
+		return &model.Wallets{}, err
 	}
-	return nil
+
+	wallet := model.Wallets{
+		WalletID:  walletFromDB.WalletID,
+		OwnedBy:   customerID,
+		Status:    walletFromDB.Status,
+		EnabledAt: walletFromDB.EnabledAt.Format("2006-01-02T15:04:05-0700"),
+		Balance:   walletFromDB.Balance,
+	}
+	return &wallet, nil
 }
