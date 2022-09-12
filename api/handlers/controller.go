@@ -14,6 +14,10 @@ type (
 	Controller interface {
 		InitHandler(echoCtx echo.Context) error
 		EnableHandler(echoCtx echo.Context) error
+		ViewWalletHandler(echoCtx echo.Context) error
+		DepositWalletHandler(echoCtx echo.Context) error
+		WithdrawWalletHandler(echoCtx echo.Context) error
+		DisableHandler(echoCtx echo.Context) error
 	}
 )
 

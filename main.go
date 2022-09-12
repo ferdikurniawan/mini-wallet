@@ -23,7 +23,8 @@ func main() {
 	}
 
 	db := store.InitPsql(config)
-	svc := services.NewService(&e.Logger, db)
+	redis := store.InitRedis(config)
+	svc := services.NewService(&e.Logger, db, redis)
 	ctrl := handlers.NewController(svc)
 
 	router(e, ctrl)

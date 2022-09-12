@@ -5,7 +5,8 @@ import (
 )
 
 type Config struct {
-	DBSource string `mapstructure:"DB_SOURCE"`
+	DBSource     string `mapstructure:"DB_SOURCE"`
+	RedisAddress string `mapstructure:"REDIS_HOST"`
 }
 
 func LoadConfig(path string) (config Config, err error) {

@@ -7,13 +7,18 @@ import (
 )
 
 const (
-	APIPrefix      = "/api/v1"
-	InitEndpoint   = APIPrefix + "/init"
-	EnableEndpoint = APIPrefix + "/enable"
+	APIPrefix              = "/api/v1"
+	InitEndpoint           = APIPrefix + "/init"
+	WalletEndpoint         = APIPrefix + "/wallet"
+	DepositWalletEndpoint  = APIPrefix + "/wallet/deposits"
+	WithdrawWalletEndpoint = APIPrefix + "/wallet/withdrawals"
 )
 
 func router(webServer *echo.Echo, ctrl handlers.Controller) {
-	webServer.GET("/", hello)
 	webServer.POST(InitEndpoint, ctrl.InitHandler)
-	webServer.POST(EnableEndpoint, ctrl.EnableHandler)
+	webServer.POST(WalletEndpoint, ctrl.EnableHandler)
+	webServer.GET(WalletEndpoint, ctrl.ViewWalletHandler)
+	webServer.PATCH(WalletEndpoint, ctrl.DisableHandler)
+	webServer.POST(DepositWalletEndpoint, ctrl.DepositWalletHandler)
+	webServer.POST(WithdrawWalletEndpoint, ctrl.WithdrawWalletHandler)
 }
